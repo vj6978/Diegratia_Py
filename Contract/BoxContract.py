@@ -10,26 +10,25 @@ class Contract(ABC):
         Initial Box Conig Logic
     """
     @abstractmethod
-    def intialConfiguration(self):
+    def onInitialConfiguration(self):
         pass
 
     """
         Box is Opened Illegaly logic
     """
     @abstractmethod
-    def boxBreached(self):
+    def onBreach(self):
         pass
 
     """
         Box Deactivation Logic
     """
     @abstractmethod
-    def deactivate(self):
+    def onDeactivation(self):
         pass
 
     """
-        Box Was Never Breached. Reboot. Config after inital
+        Box loses network connectivity.
     """
-    @abstractmethod
-    def reboot(self):
+    def onNetworkLoss(self):
         pass

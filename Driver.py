@@ -12,22 +12,22 @@ class Driver:
         self.deviceId = uuid.uuid4()
         self.box = Box(self.deviceId)
         self.boxBreach = False
-        self.start()
+        self.initialConfiguration = False
+
+    def open(self):
+        if not self.initialConfiguration:
+            self.start()
+        self.box.onBreach()
 
     def start(self):
         print("Initializing Box With Device ID : {}".format(self.deviceId))
         print("Powering On and calling initialConfiguration method")
-        self.box.intialConfiguration()
-        self.alive()
-
-    def alive(self):
-        while not self.box.boxBreached:
-            pass
-        else:
-            self.box.boxBreached()
+        self.box.onInitialConfiguration()
+        self.initialConfiguration = True
 
     def deactivate(self):
-        self.box.deactivate()
+        self.box.onDeactivation()
+        self.initialConfiguration = False
 
 driver = Driver()
 

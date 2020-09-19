@@ -9,33 +9,22 @@ class Box(BoxContract.Contract):
 
     def __init__(self, deviceId):
         self.deviceId = deviceId
-        self.configuredState = False
         self.boxBreached = False
         self.msg = "The box is safe(or yet to be configured)"
         self.numOfTimesBoxOpened = 0
 
-    def intialConfiguration(self):
-        if not self.configuredState:
-            self.configuredState = True
-            # self.boxClosed = True
-            # self.legalOpening = True
-            print("Box - {} - Configuration Complete At : {}".format(self.deviceId, datetime.datetime.now()))
-        else:
-            pass
+    def onInitialConfiguration(self):
+        # TODO: SEND MESSAGE TO USER INFORMING ABOUT CONFIGURATION STATUS.
+        print("Box - {} - Configuration Complete At : {}".format(self.deviceId, datetime.datetime.now()))
 
     # TODO: Action to perform when box is breached.
-    def boxBreached(self):
+    def onBreach(self):
         print("Box has been breached!")
         pass
 
-    def deactivate(self):
+    def onDeactivation(self):
         print("Deactivation Protocol Initiated!")
         pass
-
-    def reboot(self):
-        print("Rebooting")
-        self.numOfTimesBoxOpened = self.numOfTimesBoxOpened + 1
-
 
     # def state(self):
     #     try:
