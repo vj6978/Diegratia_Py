@@ -6,8 +6,6 @@ from Box import Box
     Manages the lifecycle of the Box
 """
 class Driver:
-
-    #TODO: Ensure lifecycle methods are correct. Replace Constructor with correct lifecycle methods
     def __init__(self):
         self.deviceId = uuid.uuid4()
         self.box = Box(self.deviceId)
@@ -16,21 +14,17 @@ class Driver:
 
     def open(self):
         if not self.initialConfiguration:
-            self.start()
+            self.startMonitoringBreach()
         self.box.onBreach()
 
-    def start(self):
+    def startMonitoringBreach(self):
         print("Initializing Box With Device ID : {}".format(self.deviceId))
         print("Powering On and calling initialConfiguration method")
         self.box.onInitialConfiguration()
         self.initialConfiguration = True
 
     def deactivate(self):
-        self.box.onDeactivation()
         self.initialConfiguration = False
+        self.box.onDeactivation()
 
 driver = Driver()
-
-# D1.configure_the_box()
-# while D1.deactivate_the_box()==False:
-#     D1.detect_box_is_opened()

@@ -14,7 +14,7 @@ class Contract(ABC):
         pass
 
     """
-        Box is Opened Illegaly logic
+        Box is Breached
     """
     @abstractmethod
     def onBreach(self):
@@ -30,5 +30,6 @@ class Contract(ABC):
     """
         Box loses network connectivity.
     """
+    @abstractmethod
     def onNetworkLoss(self):
         pass
