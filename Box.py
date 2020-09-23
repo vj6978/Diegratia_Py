@@ -24,8 +24,8 @@ class Box(BoxContract.Contract):
         self.__initialConfigComplete = initialConfigComplete
 
     def onInitialConfiguration(self) -> None:
-        print("Initial configuration for box - {} completed at : {}".format(self.__deviceId, datetime.datetime.now()))
         self.__initialConfigComplete = True
+        print("Initial configuration for box - {} completed at : {}".format(self.__deviceId, datetime.datetime.now()))
 
     # TODO: Action to perform when box is breached. Remove Deactivate Parameter
     def onBreach(self) -> None:
