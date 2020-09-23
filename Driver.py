@@ -28,6 +28,3 @@ class Driver:
                 self.box.onBreach()
         else:
             self.startInitialConfiguration()
-
-    def cleanUpActivities(self):
-        pass
