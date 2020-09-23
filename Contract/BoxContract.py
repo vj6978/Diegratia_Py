@@ -10,26 +10,33 @@ class Contract(ABC):
         Initial Box Conig Logic
     """
     @abstractmethod
-    def onInitialConfiguration(self):
+    def onInitialConfiguration(self) -> None:
         pass
 
     """
         Box is Breached
     """
     @abstractmethod
-    def onBreach(self):
+    def onBreach(self) -> None:
         pass
 
     """
         Box Deactivation Logic
     """
     @abstractmethod
-    def onDeactivation(self):
+    def onDeactivation(self) -> None:
         pass
 
     """
         Box loses network connectivity.
     """
     @abstractmethod
-    def onNetworkLoss(self):
+    def onNetworkLoss(self) -> None:
+        pass
+
+    """
+        Box clean up activities after deactivation
+    """
+    @abstractmethod
+    def onCleanUp(self) -> None:
         pass

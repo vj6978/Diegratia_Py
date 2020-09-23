@@ -1,3 +1,4 @@
+import uuid
 import datetime
 from Contract import BoxContract
 
@@ -7,23 +8,36 @@ from Contract import BoxContract
 """
 class Box(BoxContract.Contract):
 
-    def __init__(self, deviceId):
-        self.deviceId = deviceId
-        self.boxBreached = False
-        self.numOfTimesBoxOpened = 0
+    def __init__(self):
+        self.__deviceId = uuid.uuid4()
+        self.__initialConfigComplete = False
 
-    def onInitialConfiguration(self):
-        print("Box - {} - Configuration Complete At : {}".format(self.deviceId, datetime.datetime.now()))
+    @property
+    def initialConfigComplete(self):
+        return self.__initialConfigComplete
 
-    # TODO: Action to perform when box is breached.
-    def onBreach(self):
+    @initialConfigComplete.setter
+    def initialConfigComplete(self, initialConfigComplete):
+        self.__initialConfigComplete = initialConfigComplete
+
+    def onInitialConfiguration(self) -> None:
+        print("Initial configuration for box - {} completed at : {}".format(self.__deviceId, datetime.datetime.now()))
+        self.__initialConfigComplete = True
+
+    # TODO: Action to perform when box is breached. Remove Deactivate Parameter
+    def onBreach(self) -> None:
         print("Box has been breached!")
         pass
 
-    def onDeactivation(self):
+    def onDeactivation(self) -> None:
         print("Deactivation Protocol Initiated!")
+        self.__initialConfigComplete = False
+        self.onCleanUp()
+
+    def onNetworkLoss(self) -> None:
+        print("Network loss detected!")
         pass
 
-    def onNetworkLoss(self):
-        print("Network loss detected!")
+    def onCleanUp(self) -> None:
+        print("Initiating Clean Up Sequence")
         pass

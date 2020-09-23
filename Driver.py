@@ -1,4 +1,3 @@
-import uuid
 from Box import Box
 
 """
@@ -7,24 +6,28 @@ from Box import Box
 """
 class Driver:
     def __init__(self):
-        self.deviceId = uuid.uuid4()
-        self.box = Box(self.deviceId)
-        self.boxBreach = False
-        self.initialConfiguration = False
+        self.box = Box()
 
-    def open(self):
-        if not self.initialConfiguration:
-            self.startMonitoringBreach()
-        self.box.onBreach()
-
-    def startMonitoringBreach(self):
-        print("Initializing Box With Device ID : {}".format(self.deviceId))
-        print("Powering On and calling initialConfiguration method")
+    def startInitialConfiguration(self):
         self.box.onInitialConfiguration()
-        self.initialConfiguration = True
 
-    def deactivate(self):
-        self.initialConfiguration = False
-        self.box.onDeactivation()
+    """
+        Callback method
+        
+        Interface logic with processor or controller to determine when a box is open. Run it in loop.
+        deactivate parameter should be removed. For Simulation only.
+        On a separate thread, wait and see if deactivation message is received within stipulated time.
+        If no, continue breach protocol.
+        If yes, start deactivation protocol. 
+    """
+    def open(self, deactivate = False):
+        if self.box.initialConfigComplete:
+            if deactivate:
+                self.box.onDeactivation()
+            else:
+                self.box.onBreach()
+        else:
+            self.startInitialConfiguration()
 
-driver = Driver()
+    def cleanUpActivities(self):
+        pass
