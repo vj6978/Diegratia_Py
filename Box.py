@@ -1,5 +1,6 @@
 import uuid
 import datetime
+from BreachProtocol import BreachProtocol
 from Contract import BoxContract
 
 """
@@ -11,6 +12,8 @@ class Box(BoxContract.Contract):
     def __init__(self):
         self.__deviceId = uuid.uuid4()
         self.__initialConfigComplete = False
+        self.breachProtocol = BreachProtocol()
+        self.breachProtocol.setDaemon(True)
 
     @property
     def initialConfigComplete(self):
@@ -27,6 +30,7 @@ class Box(BoxContract.Contract):
     # TODO: Action to perform when box is breached. Remove Deactivate Parameter
     def onBreach(self) -> None:
         print("Box has been breached!")
+        self.breachProtocol.start()
         pass
 
     def onDeactivation(self) -> None:

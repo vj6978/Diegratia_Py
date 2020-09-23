@@ -7,6 +7,7 @@ from Box import Box
 class Driver:
     def __init__(self):
         self.box = Box()
+        self.DEACTIVATION_MESSAGE_EXPECTED_IN = 30
 
     def startInitialConfiguration(self):
         self.box.onInitialConfiguration()
@@ -21,6 +22,7 @@ class Driver:
         If yes, start deactivation protocol. 
     """
     def open(self, deactivate = False):
+
         if self.box.initialConfigComplete:
             if deactivate:
                 self.box.onDeactivation()
