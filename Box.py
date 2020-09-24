@@ -1,7 +1,9 @@
 import uuid
 import datetime
+import threading
 from BreachProtocol import BreachProtocol
 from Contract import BoxContract
+from CountdownTimer import CountdownTimer
 
 """
     Box lifecycle methods declared. 
@@ -12,7 +14,9 @@ class Box(BoxContract.Contract):
     def __init__(self):
         self.__deviceId = uuid.uuid4()
         self.__initialConfigComplete = False
-        self.breachProtocol = BreachProtocol(self.__deviceId)
+        self.event = threading.Event()
+        self.breachProtocol = BreachProtocol(self.__deviceId, self.event)
+        self.countdownTimer = CountdownTimer(self.event)
 
     @property
     def initialConfigComplete(self):
@@ -29,6 +33,7 @@ class Box(BoxContract.Contract):
     # TODO: Action to perform when box is breached. Remove Deactivate Parameter
     def onBreach(self) -> None:
         print("Box has been breached!")
+        self.countdownTimer.start()
         self.breachProtocol.start()
         pass
 

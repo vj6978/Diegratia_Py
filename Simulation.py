@@ -1,5 +1,6 @@
 from Driver import Driver
 from utility import Utility
+import threading
 
 driver = Driver()
 
@@ -8,7 +9,7 @@ def happy_path_test():
     print("\nInitiating Happy Path Test")
     print("\n---------------------------")
     driver.open()
-    driver.open(deactivate=True)
+    driver.open(True)
 
 #Breach Path Test Suite:
 def breach_path_test():
@@ -18,4 +19,4 @@ def breach_path_test():
     driver.open()
 
 happy_path_test()
-breach_path_test()
+# breach_path_test()
