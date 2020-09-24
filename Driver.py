@@ -8,7 +8,6 @@ from Contract import DriverContract
 class Driver(DriverContract.Contract):
     def __init__(self):
         self.box = Box()
-        self.DEACTIVATION_MESSAGE_EXPECTED_IN = 30
 
     def startInitialConfiguration(self):
         self.box.onInitialConfiguration()
