@@ -12,8 +12,7 @@ class Box(BoxContract.Contract):
     def __init__(self):
         self.__deviceId = uuid.uuid4()
         self.__initialConfigComplete = False
-        self.breachProtocol = BreachProtocol()
-        self.breachProtocol.setDaemon(True)
+        self.breachProtocol = BreachProtocol(self.__deviceId)
 
     @property
     def initialConfigComplete(self):
