@@ -11,13 +11,13 @@ class CountdownTimer(threading.Thread):
         self.t_zero = config.DEACTIVATION_MESSAGE_EXPECTED_IN_SECONDS
         self.event = event
         self.timeRanOut = False
-        self.deactivationMessage = True
+        self.deactivationMessage = False
 
     """
         Use this method to listen for any deactivation message
     """
     def initializeSocket(self):
-        pass
+        self.deactivationMessage == True
 
     def run(self):
         #TODO: Open connection with server. Wait for Deactivation message.
