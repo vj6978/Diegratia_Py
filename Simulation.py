@@ -1,6 +1,4 @@
 from Driver import Driver
-from utility import Utility
-import threading
 
 driver = Driver()
 

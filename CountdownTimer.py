@@ -17,6 +17,7 @@ class CountdownTimer(threading.Thread):
         Use this method to listen for any deactivation message
     """
     def initializeSocket(self):
+
         self.deactivationMessage == True
 
     def run(self):
