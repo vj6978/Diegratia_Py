@@ -3,8 +3,11 @@ import config
 
 class Utility:
     """
-    :parameter tbName table Name to which data should be saved.
-    """
+            Save To Mongo Utility
+
+            dummyData = {"deviceId": str(self.__deviceId), "x": "100", "y": "200", "z": "300"}
+            self.utility.saveToMongo(**dummyData)
+        """
     def saveToMongo(self, **kwargs):
         client = pymongo.MongoClient(config._URI)
         Database = client.get_database(config._db_string)

@@ -17,4 +17,4 @@ def breach_path_test():
     driver.open()
 
 happy_path_test()
-# breach_path_test()
+breach_path_test()

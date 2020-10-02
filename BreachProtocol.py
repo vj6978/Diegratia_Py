@@ -1,5 +1,8 @@
+import time
 import threading
+import config
 from utility import Utility
+from PiCameraUtility import PiCameraUtility
 
 class BreachProtocol(threading.Thread):
     def __init__(self, deviceId, event):
@@ -7,6 +10,7 @@ class BreachProtocol(threading.Thread):
         self.__deviceId = deviceId
         self.event = event
         self.utility = Utility()
+        self.camera = PiCameraUtility(self.__deviceId)
 
     """
         Code to capture images and other required breach events.
@@ -15,8 +19,7 @@ class BreachProtocol(threading.Thread):
     def run(self):
         print("Initiating Breach Protocol! Starting 30 second timer to wait for deactivation message")
         while not self.event.isSet():
-            print("Running required processes related breach.")
-            #TODO: In order to reduce the amount of data being sent to server, take measures such as sending coordintes only if they change, etc.
-            # dummyData = {"deviceId": str(self.__deviceId), "x": "100", "y": "200", "z": "300"}
-            # self.utility.saveToMongo(**dummyData)
-
+            self.camera.snap()
+            time.sleep(config.IMAGE_CAPTURE_DELAY)
+        else:
+            print("Deactivation Message Reached")
