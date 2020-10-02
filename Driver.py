@@ -21,12 +21,9 @@ class Driver(DriverContract.Contract):
         If no, continue breach protocol.
         If yes, start deactivation protocol. 
     """
-    def open(self, deactivate = False):
+    def open(self):
 
         if self.box.initialConfigComplete:
-            if deactivate:
-                self.box.onDeactivation()
-            else:
-                self.box.onBreach()
+            self.box.onBreach()
         else:
             self.startInitialConfiguration()

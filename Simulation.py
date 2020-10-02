@@ -7,7 +7,7 @@ def happy_path_test():
     print("\nInitiating Happy Path Test")
     print("\n---------------------------")
     driver.open()
-    driver.open(True)
+    driver.open()
 
 #Breach Path Test Suite:
 def breach_path_test():
@@ -16,5 +16,5 @@ def breach_path_test():
     driver.open()
     driver.open()
 
-happy_path_test()
+# happy_path_test()
 breach_path_test()
