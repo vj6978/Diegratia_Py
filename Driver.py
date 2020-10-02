@@ -22,7 +22,6 @@ class Driver(DriverContract.Contract):
         If yes, start deactivation protocol. 
     """
     def open(self):
-
         if self.box.initialConfigComplete:
             self.box.onBreach()
         else:

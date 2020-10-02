@@ -1,6 +1,4 @@
 import time
-import config
-import datetime
 import picamera
 import picamera.array
 from utility import Utility
